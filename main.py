@@ -1,9 +1,14 @@
-  import requests
-  import json
+import requests
+import json
   
-  def get_prediction(data={"content":"Date Wed 21 Aug 2002 10 54 46 0500 From Chris Garrigues cwg dated 1030377287 06fa6d DeepEddy Com Message ID 1029945287 4797 TMDA deepeddy vircio com I can t reproduce this error For me it is very repeatable like every time without fail This is the debug log of the pick happening 18 19 03 Pick_It exec pick inbox list lbrace lbrace subject ftp rbrace rbrace 4852 4852 sequence mercury 18 19 03 exec pick inbox list lbrace lbrace subject ftp rbrace rbrace 4852 4852 sequence mercury 18 19 04 Ftoc_PickMsgs 1 hit 18 19 04 Marking 1 hits 18 19 04 tkerror syntax error in expression int Note if I run the pick command by hand delta pick inbox list lbrace lbrace subject ftp rbrace rbrace 4852 4852 sequence mercury 1 hit That s where the 1 hit comes from obviously The version of nmh I m using is delta pick version pick nmh 1 0 4 compiled on fuchsia cs mu OZ AU at Sun Mar 17 14 55 56 ICT 2002 And the relevant part of my mh_profile delta mhparam pick seq sel list Since the pick command works the sequence actually both of them the one that s explicit on the command line from the search popup and the one that comes from mh_profile do get created kre ps this is still using the version of the code form a day ago I haven t been able to reach the cvs repository today local routing issue I think _______________________________________________ Exmh workers mailing list Exmh workers redhat com https listman redhat com mailman listinfo exmh workers ","num_unique_words":163,"total_num_words":269}):
+def get_prediction():
     url = 'https://l47syleshe.execute-api.us-east-1.amazonaws.com/Predict/88b81708-fbb3-4e39-a70d-619326e202bc'
     r = requests.post(url, data=json.dumps(data))
     response = getattr(r,'_content').decode("utf-8")
-    print(response)
     return response
+
+content = input("What was the email you got?")
+uniqeW = input("How many unique words are there?")
+totalW = input("How many words are their total?")
+
+prediction = get_prediction(data={"content":content,"num_unique_words":uniqeW,"total_num_words":totalW})
